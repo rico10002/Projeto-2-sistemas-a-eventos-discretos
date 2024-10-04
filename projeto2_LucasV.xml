@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.6//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_6.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+
+clock t;
+
+bool ocupada[8] = {false, false, false, false, false, false, false, false};
+
+bool semaforoS1S2 = true;
+bool semaforoS2S3 = true;
+bool semaforoS3S4 = true;
+bool semaforoS4S5 = true;
+bool semaforoS5S6 = true;
+bool semaforoS6S7 = true;
+bool semaforoS7S8 = true;
+bool semaforoS8S1 = true;</declaration>
+	<template>
+		<name>veiculo1</name>
+		<declaration>int voltas = 0;
+int posicao;</declaration>
+		<location id="id0" x="-526" y="-578">
+			<name x="-569" y="-620">estac_reaba</name>
+		</location>
+		<location id="id1" x="-246" y="-578">
+			<name x="-280" y="-603">S1</name>
+		</location>
+		<location id="id2" x="-135" y="-722">
+			<name x="-161" y="-765">S2</name>
+		</location>
+		<location id="id3" x="77" y="-722">
+			<name x="76" y="-756">S3</name>
+		</location>
+		<location id="id4" x="213" y="-578">
+			<name x="238" y="-587">S4</name>
+		</location>
+		<location id="id5" x="-246" y="-450">
+			<name x="-280" y="-442">S8</name>
+		</location>
+		<location id="id6" x="213" y="-433">
+			<name x="229" y="-425">S5</name>
+		</location>
+		<location id="id7" x="86" y="-306">
+			<name x="120" y="-315">S6</name>
+		</location>
+		<location id="id8" x="-118" y="-306">
+			<name x="-161" y="-314">S7</name>
+		</location>
+		<init ref="id0"/>
+		<transition id="id9">
+			<source ref="id8"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-467" y="-399">t == 35 &amp;&amp; semaforoS7S8 == true</label>
+			<label kind="assignment" x="-450" y="-382">t = 0,
+semaforoS7S8 = false,
+semaforoS6S7 = true,
+ocupada[6] = false,
+ocupada[7] = true,
+posicao = 8</label>
+		</transition>
+		<transition id="id10">
+			<source ref="id7"/>
+			<target ref="id8"/>
+			<label kind="guard" x="-135" y="-408">t == 35 &amp;&amp; semaforoS6S7 == true</label>
+			<label kind="assignment" x="-110" y="-382">t = 0,
+semaforoS6S7 = false,
+semaforoS5S6 = true,
+ocupada[5] = false,
+ocupada[6] = true,
+posicao = 7</label>
+		</transition>
+		<transition id="id11">
+			<source ref="id6"/>
+			<target ref="id7"/>
+			<label kind="guard" x="179" y="-399">t == 35 &amp;&amp; semaforoS5S6 == true</label>
+			<label kind="assignment" x="188" y="-382">t = 0,
+semaforoS5S6 = false,
+semaforoS4S5 = true,
+ocupada[4] = false,
+ocupada[5] = true,
+posicao = 6</label>
+		</transition>
+		<transition id="id12">
+			<source ref="id4"/>
+			<target ref="id6"/>
+			<label kind="guard" x="212" y="-569">t == 35 &amp;&amp; semaforoS4S5 == true</label>
+			<label kind="assignment" x="229" y="-552">t = 0,
+semaforoS4S5 = false,
+semaforoS3S4 = true,
+ocupada[3] = false,
+ocupada[4] = true,
+posicao = 5</label>
+		</transition>
+		<transition id="id13">
+			<source ref="id3"/>
+			<target ref="id4"/>
+			<label kind="guard" x="103" y="-739">t == 35 &amp;&amp; semaforoS3S4 == true</label>
+			<label kind="assignment" x="162" y="-722">t = 0,
+semaforoS3S4 = false,
+semaforoS2S3 = true,
+ocupada[2] = false,
+ocupada[3] = true,
+posicao = 4</label>
+		</transition>
+		<transition id="id14">
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-152" y="-858">t == 35 &amp;&amp; semaforoS2S3 == true</label>
+			<label kind="assignment" x="-101" y="-833">t = 0,
+semaforoS2S3 = false,
+semaforoS1S2 = true,
+ocupada[1] = false,
+ocupada[2] = true,
+posicao = 3</label>
+		</transition>
+		<transition id="id15">
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-510" y="-782">t == 35 &amp;&amp; semaforoS1S2 == true &amp;&amp; voltas &lt; 1 &amp;&amp; semaforoS2S3 == true</label>
+			<label kind="assignment" x="-348" y="-756">t = 0,
+semaforoS1S2 = false,
+semaforoS8S1 = true,
+ocupada[0] = false,
+ocupada[1] = true,
+posicao = 2</label>
+		</transition>
+		<transition id="id16">
+			<source ref="id5"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-221" y="-578">t == 35 &amp;&amp; semaforoS8S1 == true</label>
+			<label kind="assignment" x="-212" y="-552">t = 0,
+semaforoS8S1 = false,
+semaforoS7S8 = true,
+voltas = voltas + 1,
+ocupada[7] = false,
+ocupada[0] = true,
+posicao = 1</label>
+		</transition>
+		<transition id="id17">
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-433" y="-552">voltas == 1</label>
+			<label kind="assignment" x="-425" y="-527">t = 0,
+voltas = 0,
+semaforoS8S1 = true,
+ocupada[0] = false,
+posicao = 0</label>
+			<nail x="-373" y="-552"/>
+		</transition>
+		<transition id="id18">
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-773" y="-680">semaforoS8S1 == true &amp;&amp; ocupada[0] == false</label>
+			<label kind="assignment" x="-722" y="-646">t = 0,
+semaforoS8S1 = false,
+ocupada[0] = true,
+posicao = 1</label>
+		</transition>
+	</template>
+	<template>
+		<name>veiculo2</name>
+		<declaration>int voltas = 0;
+int posicao;</declaration>
+		<location id="id19" x="-526" y="-578">
+			<name x="-569" y="-620">estac_reaba</name>
+		</location>
+		<location id="id20" x="-246" y="-578">
+			<name x="-272" y="-603">S1</name>
+		</location>
+		<location id="id21" x="-135" y="-722">
+			<name x="-161" y="-765">S2</name>
+		</location>
+		<location id="id22" x="77" y="-722">
+			<name x="76" y="-756">S3</name>
+		</location>
+		<location id="id23" x="213" y="-578">
+			<name x="229" y="-595">S4</name>
+		</location>
+		<location id="id24" x="-246" y="-450">
+			<name x="-272" y="-433">S8</name>
+		</location>
+		<location id="id25" x="213" y="-433">
+			<name x="229" y="-425">S5</name>
+		</location>
+		<location id="id26" x="86" y="-306">
+			<name x="120" y="-315">S6</name>
+		</location>
+		<location id="id27" x="-118" y="-306">
+			<name x="-153" y="-297">S7</name>
+		</location>
+		<init ref="id19"/>
+		<transition id="id28">
+			<source ref="id27"/>
+			<target ref="id24"/>
+			<label kind="guard" x="-467" y="-399">t == 35 &amp;&amp; semaforoS7S8 == true</label>
+			<label kind="assignment" x="-450" y="-382">t = 0,
+semaforoS7S8 = false,
+semaforoS6S7 = true,
+ocupada[6] = false,
+ocupada[7] = true,
+posicao = 8</label>
+		</transition>
+		<transition id="id29">
+			<source ref="id26"/>
+			<target ref="id27"/>
+			<label kind="guard" x="-135" y="-408">t == 35 &amp;&amp; semaforoS6S7 == true</label>
+			<label kind="assignment" x="-110" y="-382">t = 0,
+semaforoS6S7 = false,
+semaforoS5S6 = true,
+ocupada[5] = false,
+ocupada[6] = true,
+posicao = 7</label>
+		</transition>
+		<transition id="id30">
+			<source ref="id25"/>
+			<target ref="id26"/>
+			<label kind="guard" x="179" y="-399">t == 35 &amp;&amp; semaforoS5S6 == true</label>
+			<label kind="assignment" x="188" y="-382">t = 0,
+semaforoS5S6 = false,
+semaforoS4S5 = true,
+ocupada[4] = false,
+ocupada[5] = true,
+posicao = 6</label>
+		</transition>
+		<transition id="id31">
+			<source ref="id23"/>
+			<target ref="id25"/>
+			<label kind="guard" x="212" y="-569">t == 35 &amp;&amp; semaforoS4S5 == true</label>
+			<label kind="assignment" x="229" y="-552">t = 0,
+semaforoS4S5 = false,
+semaforoS3S4 = true,
+ocupada[3] = false,
+ocupada[4] = true,
+posicao = 5</label>
+		</transition>
+		<transition id="id32">
+			<source ref="id22"/>
+			<target ref="id23"/>
+			<label kind="guard" x="103" y="-739">t == 35 &amp;&amp; semaforoS3S4 == true</label>
+			<label kind="assignment" x="162" y="-722">t = 0,
+semaforoS3S4 = false,
+semaforoS2S3 = true,
+ocupada[2] = false,
+ocupada[3] = true,
+posicao = 4</label>
+		</transition>
+		<transition id="id33">
+			<source ref="id21"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-152" y="-858">t == 35 &amp;&amp; semaforoS2S3 == true</label>
+			<label kind="assignment" x="-101" y="-833">t = 0,
+semaforoS2S3 = false,
+semaforoS1S2 = true,
+ocupada[1] = false,
+ocupada[2] = true,
+posicao = 3</label>
+		</transition>
+		<transition id="id34">
+			<source ref="id20"/>
+			<target ref="id21"/>
+			<label kind="guard" x="-450" y="-773">t == 35 &amp;&amp; semaforoS1S2 == true &amp;&amp; voltas &lt; 2 &amp;&amp; semaforoS2S3 == true</label>
+			<label kind="assignment" x="-348" y="-756">t = 0,
+semaforoS1S2 = false,
+semaforoS8S1 = true,
+ocupada[0] = false,
+ocupada[1] = true,
+posicao = 2</label>
+		</transition>
+		<transition id="id35">
+			<source ref="id24"/>
+			<target ref="id20"/>
+			<label kind="guard" x="-221" y="-578">t == 35 &amp;&amp; semaforoS8S1 == true</label>
+			<label kind="assignment" x="-212" y="-552">t = 0,
+semaforoS8S1 = false,
+semaforoS7S8 = true,
+voltas = voltas + 1,
+ocupada[7] = false,
+ocupada[0] = true,
+posicao = 1</label>
+		</transition>
+		<transition id="id36">
+			<source ref="id20"/>
+			<target ref="id19"/>
+			<label kind="guard" x="-433" y="-552">voltas == 2</label>
+			<label kind="assignment" x="-425" y="-527">t = 0,
+voltas = 0,
+semaforoS8S1 = true,
+ocupada[0] = false,
+posicao = 0</label>
+			<nail x="-373" y="-552"/>
+		</transition>
+		<transition id="id37">
+			<source ref="id19"/>
+			<target ref="id20"/>
+			<label kind="guard" x="-756" y="-671">semaforoS8S1 == true &amp;&amp; ocupada[0] == false</label>
+			<label kind="assignment" x="-467" y="-646">t = 0,
+semaforoS8S1 = false,
+ocupada[0] = true,
+posicao = 1</label>
+		</transition>
+	</template>
+	<template>
+		<name>veiculo3</name>
+		<declaration>int voltas = 0;
+int posicao;</declaration>
+		<location id="id38" x="-526" y="-578">
+			<name x="-569" y="-620">estac_reaba</name>
+		</location>
+		<location id="id39" x="-246" y="-578">
+			<name x="-280" y="-612">S1</name>
+		</location>
+		<location id="id40" x="-135" y="-722">
+			<name x="-161" y="-765">S2</name>
+		</location>
+		<location id="id41" x="77" y="-722">
+			<name x="76" y="-765">S3</name>
+		</location>
+		<location id="id42" x="213" y="-578">
+			<name x="229" y="-595">S4</name>
+		</location>
+		<location id="id43" x="-246" y="-450">
+			<name x="-280" y="-442">S8</name>
+		</location>
+		<location id="id44" x="213" y="-433">
+			<name x="229" y="-425">S5</name>
+		</location>
+		<location id="id45" x="86" y="-306">
+			<name x="120" y="-315">S6</name>
+		</location>
+		<location id="id46" x="-118" y="-306">
+			<name x="-153" y="-297">S7</name>
+		</location>
+		<init ref="id38"/>
+		<transition id="id47">
+			<source ref="id46"/>
+			<target ref="id43"/>
+			<label kind="guard" x="-467" y="-399">t == 35 &amp;&amp; semaforoS7S8 == true</label>
+			<label kind="assignment" x="-450" y="-382">t = 0,
+semaforoS7S8 = false,
+semaforoS6S7 = true,
+ocupada[6] = false,
+ocupada[7] = true,
+posicao = 8</label>
+		</transition>
+		<transition id="id48">
+			<source ref="id45"/>
+			<target ref="id46"/>
+			<label kind="guard" x="-135" y="-408">t == 35 &amp;&amp; semaforoS6S7 == true</label>
+			<label kind="assignment" x="-110" y="-382">t = 0,
+semaforoS6S7 = false,
+semaforoS5S6 = true,
+ocupada[5] = false,
+ocupada[6] = true,
+posicao = 7</label>
+		</transition>
+		<transition id="id49">
+			<source ref="id44"/>
+			<target ref="id45"/>
+			<label kind="guard" x="179" y="-399">t == 35 &amp;&amp; semaforoS5S6 == true</label>
+			<label kind="assignment" x="188" y="-382">t = 0,
+semaforoS5S6 = false,
+semaforoS4S5 = true,
+ocupada[4] = false,
+ocupada[5] = true,
+posicao = 6</label>
+		</transition>
+		<transition id="id50">
+			<source ref="id42"/>
+			<target ref="id44"/>
+			<label kind="guard" x="212" y="-569">t == 35 &amp;&amp; semaforoS4S5 == true</label>
+			<label kind="assignment" x="229" y="-552">t = 0,
+semaforoS4S5 = false,
+semaforoS3S4 = true,
+ocupada[3] = false,
+ocupada[4] = true,
+posicao = 5</label>
+		</transition>
+		<transition id="id51">
+			<source ref="id41"/>
+			<target ref="id42"/>
+			<label kind="guard" x="103" y="-739">t == 35 &amp;&amp; semaforoS3S4 == true</label>
+			<label kind="assignment" x="162" y="-722">t = 0,
+semaforoS3S4 = false,
+semaforoS2S3 = true,
+ocupada[2] = false,
+ocupada[3] = true,
+posicao = 4</label>
+		</transition>
+		<transition id="id52">
+			<source ref="id40"/>
+			<target ref="id41"/>
+			<label kind="guard" x="-152" y="-858">t == 35 &amp;&amp; semaforoS2S3 == true</label>
+			<label kind="assignment" x="-101" y="-833">t = 0,
+semaforoS2S3 = false,
+semaforoS1S2 = true,
+ocupada[1] = false,
+ocupada[2] = true,
+posicao = 3</label>
+		</transition>
+		<transition id="id53">
+			<source ref="id39"/>
+			<target ref="id40"/>
+			<label kind="guard" x="-450" y="-773">t == 35 &amp;&amp; semaforoS1S2 == true &amp;&amp; voltas &lt; 3 &amp;&amp; semaforoS2S3 == true</label>
+			<label kind="assignment" x="-348" y="-756">t = 0,
+semaforoS1S2 = false,
+semaforoS8S1 = true,
+ocupada[0] = false,
+ocupada[1] = true,
+posicao = 2</label>
+		</transition>
+		<transition id="id54">
+			<source ref="id43"/>
+			<target ref="id39"/>
+			<label kind="guard" x="-221" y="-578">t == 35 &amp;&amp; semaforoS8S1 == true</label>
+			<label kind="assignment" x="-212" y="-552">t = 0,
+semaforoS8S1 = false,
+semaforoS7S8 = true,
+voltas = voltas + 1,
+ocupada[7] = false,
+ocupada[0] = true,
+posicao = 1</label>
+		</transition>
+		<transition id="id55">
+			<source ref="id39"/>
+			<target ref="id38"/>
+			<label kind="guard" x="-433" y="-552">voltas == 3</label>
+			<label kind="assignment" x="-425" y="-527">t = 0,
+voltas = 0,
+semaforoS8S1 = true,
+ocupada[0] = false,
+posicao = 0</label>
+			<nail x="-373" y="-552"/>
+		</transition>
+		<transition id="id56">
+			<source ref="id38"/>
+			<target ref="id39"/>
+			<label kind="guard" x="-756" y="-671">semaforoS8S1 == true &amp;&amp; ocupada[0] == false</label>
+			<label kind="assignment" x="-467" y="-646">t = 0,
+semaforoS8S1 = false,
+ocupada[0] = true, 
+posicao = 1</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+
+// List one or more processes to be composed into a system.
+system veiculo1 ,veiculo2 ,veiculo3;
+</system>
+	<queries>
+		<query>
+			<formula>A[] forall(i : int[0,7]) (ocupada[i] imply (veiculo1.posicao != i || veiculo2.posicao != i || veiculo3.posicao != i))
+
+</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2024-10-04 03:11:06 -0300">
+			</result>
+		</query>
+		<query>
+			<formula>A[] (veiculo1.voltas &lt;= 1 &amp;&amp; veiculo2.voltas &lt;= 2 &amp;&amp; veiculo3.voltas &lt;= 3)
+</formula>
+			<comment/>
+			<result outcome="success" type="quality" timestamp="2024-10-04 03:11:07 -0300">
+			</result>
+		</query>
+		<query>
+			<formula>A[] not deadlock
+</formula>
+			<comment/>
+			<result outcome="failure" type="quality" timestamp="2024-10-04 03:13:24 -0300">
+			</result>
+		</query>
+	</queries>
+</nta>
